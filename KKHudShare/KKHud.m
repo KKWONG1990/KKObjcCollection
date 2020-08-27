@@ -28,7 +28,8 @@
 }
 
 - (void)hudInit:(void (^)(MBProgressHUD * _Nonnull))init {
-    _hud = [[MBProgressHUD alloc] init];
+    _hud        = [[MBProgressHUD alloc] init];
+    _animated   = YES;
     init(_hud);
 }
 
@@ -67,16 +68,23 @@
     };
 }
 
-- (void (^)(void))showHUd {
-    return ^{
-        [self->_hud showAnimated:self->_animated];
-        self->_hud.mode = self->_mode;
-        self->_hud.label.text = self->_title;
-        self->_hud.detailsLabel.text = self->_detail;
+- (KKHud * _Nonnull (^)(float))progress {
+    return ^(float progress) {
+        self->_hud.progress = progress;
+        return self;
     };
 }
 
-- (MBProgressHUD * (^)(void))hideHud {
+- (KKHud * _Nonnull (^)(void))show {
+    return ^{
+        [self->_hud showAnimated:self->_animated];
+        self->_hud.mode                 = self->_mode;
+        self->_hud.label.text           = self->_title;
+        self->_hud.detailsLabel.text    = self->_detail;
+        return self;
+    };
+}
+- (MBProgressHUD * (^)(void))hide {
     return ^{
         [self->_hud hideAnimated:self->_animated];
         [self resetValue];
