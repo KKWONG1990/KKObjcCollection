@@ -47,14 +47,14 @@
     };
 }
 
-- (KKHud * _Nonnull (^)(NSString * _Nonnull))title {
+- (KKHud * _Nonnull (^)(NSString * _Nullable))title {
     return ^(NSString * title) {
         self->_title = title;
         return self;
     };
 }
 
-- (KKHud * _Nonnull (^)(NSString * _Nonnull))detail {
+- (KKHud * _Nonnull (^)(NSString * _Nullable))detail {
     return ^(NSString * detail) {
         self->_detail = detail;
         return self;

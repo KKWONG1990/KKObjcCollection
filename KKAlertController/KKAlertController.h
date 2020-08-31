@@ -22,16 +22,24 @@ typedef void(^_Nullable ActionHandle)(UIAlertAction * action);
                           NSString * _Nullable message,
                           UIAlertControllerStyle preferredStyle))init;
 
-/// 添加action - block传入标题、样式、ActionHandle类型block
+/// 添加action - block传入标题、样式、自定义颜色、ActionHandle类型block
 - (KKAlertController *(^)(NSString * _Nullable title,
                           UIAlertActionStyle actionStyle,
+                          UIColor * _Nullable titleColor,
                           ActionHandle handle))addAction;
 
-
-
-/// 添加TextField - block传入占位符和 TextFieldHandle 类型block
+/// 添加TextField - block传入占位符、自定义颜色、 TextFieldHandle 类型block
 - (KKAlertController *(^)(NSString * _Nullable placehoder,
+                          UIColor * _Nullable textColor,
                           TextFieldHandle handle))addTextField;
+
+/// 自定义Title样式
+- (KKAlertController *(^)(UIColor * _Nullable titleColor,
+                          UIFont * _Nullable titleFont))titleStyle;
+
+/// 自定义message样式
+- (KKAlertController *(^)(UIColor * _Nullable messageColor,
+                          UIFont * _Nullable messageFont))messageStyle;
 @end
 
 NS_ASSUME_NONNULL_END
